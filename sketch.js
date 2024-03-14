@@ -51,7 +51,6 @@ function draw() {
 
   if (bricks.length == 0) {
     noLoop()
-    rectMode(CENTER)
     text("Game over", width / 2, height / 2)
   }
 }
