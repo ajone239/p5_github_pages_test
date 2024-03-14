@@ -1,29 +1,39 @@
 const width = 500
 const height = 400
 
-class Player {
-  constructor(vy) {
-    this.vy = vy;
-  }
-}
+let ball
+let right_wall
+let left_wall
+let top_wall
+let bot_wall
 
-let p1 = new Player(height / 2);
+let showables
+let updateables
+let collidables
 
 function setup() {
   createCanvas(width, height);
-}
+  ball = new Ball(20)
+  left_wall = new Rectangle(0, -10, 5, height + 20)
+  right_wall = new Rectangle(width - 5, -10, 5, height + 20)
+  top_wall = new Rectangle(-10, 0, width + 10, 5)
+  bot_wall = new Rectangle(-10, height - 5, width + 10, 5)
 
+  showables = [ball, right_wall, left_wall, top_wall, bot_wall]
+  updateables = [ball]
+  collidables = [right_wall, left_wall, top_wall, bot_wall]
+}
 function draw() {
   background(0);
   stroke(255);
-  line(width / 2, 0, width / 2, height);
-  ellipse(width / 2, p1.vy, 100);
-}
 
-function keyPressed() {
-  if (key == 'w') {
-    p1.vy -= 5;
-  } else if (key == 's') {
-    p1.vy += 5;
+  for (var s of showables) {
+    s.show()
+  }
+  for (var u of updateables) {
+    u.update()
+  }
+  for (var c of collidables) {
+    ball.check_collision(c)
   }
 }
