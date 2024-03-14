@@ -19,7 +19,7 @@ let collidables
 function setup() {
   createCanvas(width, height);
 
-  ball = new Ball(20)
+  ball = new Ball(10)
   player = new Player(width / 2 - 30, height - 40, 60, 20)
 
   left_wall = new Rectangle(0, -10, 5, height + 20)
@@ -51,17 +51,19 @@ function draw() {
 
   if (bricks.length == 0) {
     noLoop()
+    rectMode(CENTER)
+    text("Game over", width / 2, height / 2)
   }
 }
 
 function makeBricks() {
   const vert_count = 3
-  const horz_count = 8
+  const horz_count = 9
   for (var i = 0; i < vert_count; i++) {
     for (var j = 0; j < horz_count; j++) {
       var b = new Brick(
-        15 + (j * width / horz_count),
-        15 + (i * height / 4 / vert_count),
+        10 + (j * width / horz_count),
+        10 + (i * height / 4 / vert_count),
         50,
         20,
         bricks
